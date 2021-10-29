@@ -1,4 +1,4 @@
-const Info = {
+const info = {
   description: "Display info about server ",
   resolve: () => "This is a BlogPost server",
 };

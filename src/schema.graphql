@@ -1,92 +1,85 @@
- 
+type Query {
+  # to show info
+  info: String!
 
- type Query{
- # to show info
- info:String!
+  #display blog
+  feed: Feed!
 
-#display blog
- feed; Feed!
+  #find user
+  user(userId: ID!): User!
 
-#find user
- user(userId: ID!): User!
- }
-
- type Mutation{
-
- # to create user
- createUser(name: String!, email: String!) : User!
-
-#delete user
-deleteUser(userId: String!) : User!
-
-# create post for blog
- createBlogPost(postText: String!) : BlogPost!
-
-# to update post on blog
- updateBlogPost(blogPostId: String!) : BlogPost!
-
-
-# to like a blog post
- likeBlogPost(blogPostId: String!) : Like!
-
-
-# to comment on a blog post
-comment(blogPostId: ID!): Comment!
-
-# delete comment made on blog post
-deleteComment(commentId: ID!): Comment!
-
-
-# reply to a comment made on the blog post
-replyComment(commentId: ID!): Reply!
-
-
-
+  users: [User!]!
 }
 
-type Feed{
-    posts: [BlogPost!]
-    count: Int
-    }
+type Mutation {
+  # to create user
+  createUser(name: String!, email: String!): User!
 
-type User{
-    id:ID !
-    name: String!
-    email: String!
-    posts: [BlogPost!]!
-    }
+  #delete user
+  deleteUser(userId: String!): User!
 
-type Comment{  
-    id:ID!
-    message: String!
-    post: BlogPost!
-    replies: [Reply!]!
-    postedBy: User!
-    createdAt : DateTime
- }
+  # create post for blog
+  createBlogPost(postText: String!): BlogPost!
 
- type BlogPost{
-    id:ID !
-    postText: String!
-    postedBy: User!
-    comments: [Comment!]!
-    likes:Like!
-    createdAt: DateTime
-    }
+  # to update post on blog
+  updateBlogPost(blogPostId: String!): BlogPost!
 
-    type Reply {
-    id:ID !
-    message: String!
-    post:BlogPost!
-    postedBy: User!
-    createdAt: DateTime
-    }
+  # to like a blog post
+  likeBlogPost(blogPostId: String!): Like!
 
-    type Like{
-        id :ID !
-        post: BlogPost!
-        user: User!
-        count: Int!
-        }
+  # to comment on a blog post
+  comment(blogPostId: ID!): Comment!
 
-        scalar DateTime
+  # delete comment made on blog post
+  deleteComment(commentId: ID!): Comment!
+
+  # reply to a comment made on the blog post
+  replyComment(commentId: ID!): Reply!
+}
+
+type Feed {
+  posts: [BlogPost!]
+  count: Int
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  posts: [BlogPost!]!
+}
+
+type Comment {
+  id: ID!
+  message: String!
+  post: BlogPost!
+  replies: [Reply!]!
+  postedBy: User!
+  createdAt: DateTime
+}
+
+type BlogPost {
+  id: ID!
+  postText: String!
+  postedBy: User!
+  comments: [Comment!]!
+  likes: Like!
+  createdAt: DateTime
+}
+
+type Reply {
+  id: ID!
+  message: String!
+  post: BlogPost!
+  postedBy: User!
+  createdAt: DateTime
+}
+
+type Like {
+  id: ID!
+  post: BlogPost!
+  user: User!
+  count: Int!
+}
+
+scalar DateTime

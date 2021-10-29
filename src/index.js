@@ -1,9 +1,16 @@
 const { ApolloServer } = require("apollo-server");
+const mongoose = require("mongoose");
+
+// require("dotenv").config();
+require("dotenv").config();
 
 const { readFileSync } = require("fs");
+
 const path = require("path");
 
 const models = require("./models");
+
+const PORT = process.env.PORT ?? 4000;
 
 const typeDefs = readFileSync(path.join(__dirname, "schema.graphql"), "utf8");
 
@@ -12,16 +19,17 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   path: "/",
-  context: ({ req, ress }) => ({
+  context: ({ req, res }) => ({
     ...req,
     ...res,
     models,
   }),
 });
 
-mongoose.connect(process.env.DATABASE_URL, () => {
-  console.log("✔  Connected to database");
+mongoose.connect(String(process.env.DATABASE_URL), () => {
+  console.log("Connected to database");
 });
-server.listen(port, () => {
+
+server.listen(PORT, () => {
   console.log("👌  Server is up and running!");
 });
