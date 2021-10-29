@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Harold-FN-2187/blogpost-graphql#readme",
   "dependencies": {
     "apollo-server": "^3.4.0",
-    "graphql": "^16.0.0"
+    "graphql": "^16.0.0",
+    "mongoose": "^6.0.12"
   }
 }
